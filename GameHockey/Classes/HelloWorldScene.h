@@ -11,7 +11,7 @@
 // When you import this file, you import all the cocos2d classes
 #include "cocos2d.h"
 #include "Box2D.h"
-
+#include "MyContactListener.h"
 class PhysicsSprite : public cocos2d::CCSprite
 {
 public:
@@ -57,7 +57,27 @@ private:
     
     b2Body *_paddleBody;
     b2Fixture *_paddleFixture;
+    
+    b2Body *_paddleBody2;
+    b2Fixture *_paddleFixture2;
+    
     b2MouseJoint *_mouseJoint;
+    b2MouseJoint *_mouseJoint2;
+    
+    
+    cocos2d::CCSprite *gol1;
+    b2Body *body_gol1;
+    b2Fixture *gol1_Fixture;
+    cocos2d::CCSprite *gol2;
+    b2Body *body_gol2;
+    b2Fixture *gol2_Fixture;
+    int sumPoint1;
+    cocos2d:: CCSprite * textSumPoint1;
+    
+    int sumPoint2;
+    cocos2d:: CCSprite * textSumPoint2;
+    
+    MyContactListener *_contactListener;
 };
 
 #endif // __HELLO_WORLD_H__

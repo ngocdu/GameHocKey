@@ -7,7 +7,7 @@
 //
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-
+#include "MyContactListener.h"
 using namespace cocos2d;
 using namespace CocosDenshion;
 
@@ -75,19 +75,90 @@ HelloWorld::HelloWorld()
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     // init physics
     this->initPhysics();
+    sumPoint1 = 0;
+    sumPoint2 = 0;
+    //-----------------------add background , gol --------------------------
+    //CCSprite *bg = CCSprite::create("");
+    gol1 = CCSprite::create("LongRed2.png");
+    gol1->setPosition(ccp(s.width/2,10));;
+    gol1->setTag(5);
+    this->addChild(gol1);
+    
+    // Create gol1 body
+    b2BodyDef gol1BodyDef;
+    gol1BodyDef.type = b2_staticBody;
+    gol1BodyDef.position.Set(s.width/2/PTM_RATIO, 10/PTM_RATIO);
+    gol1BodyDef.userData = gol1;
+    body_gol1 = world->CreateBody(&gol1BodyDef);
+    
+    // Create gol1 shape
+    b2PolygonShape gol1Shape;
+    gol1Shape.SetAsBox(gol1->getContentSize().width/PTM_RATIO/2,
+                         gol1->getContentSize().height/PTM_RATIO/2);
+    
+    // Create shape definition and add to body
+    b2FixtureDef gol1ShapeDef;
+    gol1ShapeDef.shape = &gol1Shape;
+    gol1ShapeDef.density = 10.0f;
+    gol1ShapeDef.friction = 0.4f;
+    gol1ShapeDef.restitution = 0.1f;
+    gol1_Fixture = body_gol1->CreateFixture(&gol1ShapeDef);
+    
+    
+    gol2 = CCSprite::create("LongGreen2.png");
+    gol2->setPosition(ccp(s.width/2,s.height-5));
+    gol2->setTag(6);
+    this->addChild(gol2);
+    
+    // Create gol1 body
+    b2BodyDef gol2BodyDef;
+    gol2BodyDef.type = b2_staticBody;
+    gol2BodyDef.position.Set(s.width/2/PTM_RATIO, (s.height-5)/PTM_RATIO);
+    gol2BodyDef.userData = gol2;
+    body_gol2 = world->CreateBody(&gol2BodyDef);
+    
+    // Create gol2 shape
+    b2PolygonShape gol2Shape;
+    gol2Shape.SetAsBox(gol2->getContentSize().width/PTM_RATIO/2,
+                       gol2->getContentSize().height/PTM_RATIO/2);
+    
+    // Create shape definition and add to body
+    b2FixtureDef gol2ShapeDef;
+    gol2ShapeDef.shape = &gol2Shape;
+    gol2ShapeDef.density = 10.0f;
+    gol2ShapeDef.friction = 0.4f;
+    gol2ShapeDef.restitution = 0.1f;
+    gol2_Fixture = body_gol2->CreateFixture(&gol2ShapeDef);
+    
+    
+    CCLabelTTF *lbPoint1=CCLabelTTF::create("Point1: ", "Times New Roman",24);
+    lbPoint1->setPosition(ccp(45,s.height/2-50));
+    this->addChild(lbPoint1,5);
+    
+    CCTexture2D *txPoint1=new CCTexture2D();
+    char strPoint1[20] ={0};
+    sprintf(strPoint1, "%i",sumPoint1);
+    txPoint1->initWithString(strPoint1,"Times New Roman",24);
+    
+    textSumPoint1=CCSprite::createWithTexture(txPoint1);
+    textSumPoint1->setPosition(ccp(100,s.height/2-50));
+    this->addChild(textSumPoint1);
+    
+    CCLabelTTF *lbPoint2=CCLabelTTF::create("Point2: ", "Times New Roman",24);
+    lbPoint2->setPosition(ccp(45,s.height/2+50));
+    this->addChild(lbPoint2,5);
+    
+    CCTexture2D *txPoint2=new CCTexture2D();
+    char strPoint2[20] ={0};
+    sprintf(strPoint2, "%i",sumPoint2);
+    txPoint2->initWithString(strPoint2,"Times New Roman",24);
+    
+    textSumPoint2=CCSprite::createWithTexture(txPoint2);
+    textSumPoint2->setPosition(ccp(100,s.height/2+50));
+    this->addChild(textSumPoint2);
 
-    CCSpriteBatchNode *parent = CCSpriteBatchNode::create("blocks.png", 100);
-    m_pSpriteTexture = parent->getTexture();
+    //----------------------------------------------------------------------
 
-    addChild(parent, 0, kTagParentNode);
-
-
-    addNewSpriteAtPosition(ccp(s.width/2, s.height/2));
-
-    CCLabelTTF *label = CCLabelTTF::create("Tap screen", "Marker Felt", 32);
-    addChild(label, 0);
-    label->setColor(ccc3(0,0,255));
-    label->setPosition(ccp( s.width/2, s.height-50));
     
     scheduleUpdate();
     //this->schedule(schedule_selector(HelloWorld::kick), 4);
@@ -97,13 +168,10 @@ HelloWorld::HelloWorld()
     //_ball = CCSprite spriteWithFile:@"ball.png" rect:CGRectMake(0, 0, 52, 52)];
     _ball = CCSprite::create("ball.png");
     _ball->setTag(1);
-    _ball->setPosition(ccp(100, 300));
+    _ball->setPosition(ccp(300, 300));
     this->addChild(_ball);
     
-    // Create a world
-    b2Vec2 gravity = b2Vec2(0.0f, -8.0f);
-    //_world = new b2World(gravity);
-    
+        
     // Create ball body and shape
     b2BodyDef ballBodyDef;
     ballBodyDef.type = b2_dynamicBody;
@@ -117,7 +185,7 @@ HelloWorld::HelloWorld()
     b2FixtureDef ballShapeDef;
     ballShapeDef.shape = &circle;
     ballShapeDef.density = 1.0f;
-    ballShapeDef.friction = 0.0f;
+    ballShapeDef.friction = 0.3f;
     ballShapeDef.restitution = 1.0f;
     _body->CreateFixture(&ballShapeDef);
     //----------------------------------------------------------------------
@@ -125,6 +193,8 @@ HelloWorld::HelloWorld()
     // Create paddle and add it to the layer
     CCSprite *paddle = CCSprite::create("paddle.png");
     paddle->setPosition(ccp(s.width/2, 50));
+    
+    paddle->setTag(2);
     this->addChild(paddle);
     
     // Create paddle body
@@ -143,17 +213,45 @@ HelloWorld::HelloWorld()
     b2FixtureDef paddleShapeDef;
     paddleShapeDef.shape = &paddleShape;
     paddleShapeDef.density = 10.0f;
-    paddleShapeDef.friction = 0.4f;
-    paddleShapeDef.restitution = 0.1f;
+    paddleShapeDef.friction = 0.8f;
+    paddleShapeDef.restitution = 0.4f;
     _paddleFixture = _paddleBody->CreateFixture(&paddleShapeDef);
     //----------------------------------------------------------
+    //---------------------------------paddle2--------------------------------
+    // Create paddle and add it to the layer
+    CCSprite *paddle2 = CCSprite::create("paddle.png");
+    paddle2->setPosition(ccp(s.width/2, s.height-50));
     
-    //---------------------jointDef--------------------------------
+    paddle2->setTag(3);
+    this->addChild(paddle2);
+    
+    // Create paddle body
+    b2BodyDef paddleBodyDef2;
+    paddleBodyDef2.type = b2_dynamicBody;
+    paddleBodyDef2.position.Set(s.width/2/PTM_RATIO, (s.height-50)/PTM_RATIO);
+    paddleBodyDef2.userData = paddle2;
+    _paddleBody2 = world->CreateBody(&paddleBodyDef2);
+    
+    // Create paddle shape
+    b2PolygonShape paddleShape2;
+    paddleShape2.SetAsBox(paddle2->getContentSize().width/PTM_RATIO/2,
+                         paddle2->getContentSize().height/PTM_RATIO/2);
+    
+    // Create shape definition and add to body
+    b2FixtureDef paddleShapeDef2;
+    paddleShapeDef2.shape = &paddleShape2; //hinh dang
+    paddleShapeDef2.density = 10.0f; //mat do cai nay de quy dinh trong luong cua vat
+    paddleShapeDef2.friction = 0.8f; //ma sat
+    paddleShapeDef2.restitution = 0.4f; //su nay - dan hoi
+    _paddleFixture2 = _paddleBody2->CreateFixture(&paddleShapeDef2);
+    //----------------------------------------------------------
+    
+    //---------------------gioi han chi cho di chuyen theo truc Ox --------------------------------
     // Restrict paddle along the x axis
-    b2PrismaticJointDef jointDef;
-    b2Vec2 worldAxis(1.0f, 0.0f);
-    jointDef.collideConnected = true;
-    jointDef.Initialize(_paddleBody, groundBody,_paddleBody->GetWorldCenter(), worldAxis);
+//    b2PrismaticJointDef jointDef;
+//    b2Vec2 worldAxis(1.0f, 0.0f);
+//    jointDef.collideConnected = true;
+//    jointDef.Initialize(_paddleBody, groundBody,_paddleBody->GetWorldCenter(), worldAxis);
 //    world->CreateJoint(&jointDef);
     //-----------------------------------------------------------
 }
@@ -183,6 +281,10 @@ void HelloWorld::initPhysics()
     world->SetAllowSleeping(true);
 
     world->SetContinuousPhysics(true);
+    
+    
+    _contactListener = new MyContactListener();
+    world->SetContactListener(_contactListener);
 
     // m_debugDraw = new GLESDebugDraw( PTM_RATIO );
     // world->SetDebugDraw(m_debugDraw);
@@ -226,33 +328,7 @@ void HelloWorld::initPhysics()
     groundBody->CreateFixture(&groundBox,0);
     
     
-    //--------------------------ball-----------------------------------
-//    // Create edges around the entire screen
-//	b2BodyDef groundBodyDef;
-//	groundBodyDef.position.Set(0,0);
-//    
-//	b2Body *groundBody = _world->CreateBody(&groundBodyDef);
-//	b2EdgeShape groundEdge;
-//	b2FixtureDef boxShapeDef;
-//	boxShapeDef.shape = &groundEdge;
-//    
-//	//wall definitions  dinh nghia 4 buc tuong 
-//	groundEdge.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO, 0));
-//	groundBody->CreateFixture(&boxShapeDef);
-//    
-//    
-//    
-//    groundEdge.Set(b2Vec2(0,0), b2Vec2(0,s.height/PTM_RATIO));
-//    groundBody->CreateFixture(&boxShapeDef);
-//    
-//    groundEdge.Set(b2Vec2(0, s.height/PTM_RATIO),
-//                   b2Vec2(s.width/PTM_RATIO, s.height/PTM_RATIO));
-//    groundBody->CreateFixture(&boxShapeDef);
-//    
-//    groundEdge.Set(b2Vec2(s.width/PTM_RATIO, s.height/PTM_RATIO),
-//                   b2Vec2(s.width/PTM_RATIO, 0));
-//    groundBody->CreateFixture(&boxShapeDef);
-    //-----------------------------------------------------------------
+   
 }
 
 void HelloWorld::draw()
@@ -326,6 +402,7 @@ void HelloWorld::update(float dt)
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
     
+    CCSize s = CCDirector::sharedDirector()->getWinSize();
     int velocityIterations = 8;
     int positionIterations = 1;
     
@@ -339,8 +416,26 @@ void HelloWorld::update(float dt)
         if (b->GetUserData() != NULL) {
             //Synchronize the AtlasSprites position and rotation with the corresponding body
             CCSprite* myActor = (CCSprite*)b->GetUserData();
-            myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
-            myActor->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );
+            
+            if (myActor->getTag()==2 ) {
+                if (b->GetPosition().y * PTM_RATIO < s.height/2 - s.height/20) {
+                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+                }
+                
+            }
+            else if (myActor->getTag()==3)
+            {
+                if (b->GetPosition().y * PTM_RATIO > s.height/2 + s.height/20) {
+                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+                }
+            }
+            else
+            {
+                myActor->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );
+                myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+            }
+            
+            
         }    
     }
     
@@ -353,7 +448,7 @@ void HelloWorld::update(float dt)
             
             // if ball is going too fast, turn on damping
             if (sprite->getTag() == 1) {
-                static int maxSpeed = 10;
+                static int maxSpeed = 5;
                 
                 b2Vec2 velocity = b->GetLinearVelocity();
                 float32 speed = velocity.Length();
@@ -366,11 +461,101 @@ void HelloWorld::update(float dt)
                 
             }
             
-            sprite->setPosition(ccp(b->GetPosition().x * PTM_RATIO,
-                                  b->GetPosition().y * PTM_RATIO));
-            sprite->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
+            
+            
+            if (sprite->getTag()==2 ) {
+                if (b->GetPosition().y * PTM_RATIO <= s.height/2 - s.height/20) {
+                    sprite->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+                }
+                
+            }
+            else if (sprite->getTag()==3)
+            {
+                if (b->GetPosition().y * PTM_RATIO >= s.height/2 + s.height/20) {
+                    sprite->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+                }
+            }
+            else
+            {
+                sprite->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );
+                sprite->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+            }
+
+            
         }
     }
+    
+    
+    std::vector<b2Body *>toDestroy;
+    std:vector<MyContact>::iterator pos;
+    
+    for (pos = _contactListener->_contacts.begin();
+         pos != _contactListener->_contacts.end(); ++pos){
+        MyContact contact = *pos;
+        
+        b2Body *bodyA = contact.fixtureA->GetBody();
+        b2Body *bodyB = contact.fixtureB->GetBody();
+        if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL) {
+            CCSprite *spriteA = (CCSprite *)bodyA->GetUserData();
+            CCSprite *spriteB = (CCSprite *)bodyB->GetUserData();
+            
+            if ( (spriteA->getTag() == 1 && spriteB->getTag() == 5) || (spriteA->getTag() == 5 && spriteB->getTag() == 1)) {
+                sumPoint1++;
+                CCTintTo* tint1 = CCTintTo::create(0.2, 255, 50, 0);
+                CCTintTo* tint2 = CCTintTo::create(0.2, 255, 0, 220);
+                CCTintTo* tint3 = CCTintTo::create(0.2, 0, 50, 220);
+                CCTintTo* tint4 = CCTintTo::create(0.2, 0, 0, 255);
+                CCTintTo* tint5 = CCTintTo::create(0.2, 255, 255, 0);
+                CCArray *ar = new CCArray();
+                ar->addObject(tint1);
+                ar->addObject(tint2);
+                ar->addObject(tint3);
+                ar->addObject(tint4);
+                ar->addObject(tint5);
+                CCSequence* sequence = CCSequence::create(ar);
+                
+                if (spriteA->getTag() == 5) {
+                    spriteA->runAction(sequence);
+                }
+                else spriteB->runAction(sequence);
+            } else if ((spriteA->getTag() == 1 && spriteB->getTag() == 6) || (spriteA->getTag() == 6 && spriteB->getTag() == 1)){
+                sumPoint2++;
+                CCTintTo* tint1 = CCTintTo::create(0.2, 255, 50, 0);
+                CCTintTo* tint2 = CCTintTo::create(0.2, 255, 0, 220);
+                CCTintTo* tint3 = CCTintTo::create(0.2, 0, 255, 0);
+                CCTintTo* tint4 = CCTintTo::create(0.2, 0, 0, 255);
+                CCTintTo* tint5 = CCTintTo::create(0.2, 255, 50, 0);
+                CCArray *ar = new CCArray();
+                ar->addObject(tint1);
+                ar->addObject(tint2);
+                ar->addObject(tint3);
+                ar->addObject(tint4);
+                ar->addObject(tint5);
+                CCSequence* sequence = CCSequence::create(ar);
+                
+                if (spriteA->getTag() == 6) {
+                    spriteA->runAction(sequence);
+                }
+                else spriteB->runAction(sequence);
+            }
+        }
+    }
+    
+    
+    CCTexture2D *txPoint1=new CCTexture2D();
+    char strPoint1[20] ={0};
+    sprintf(strPoint1, "%i",sumPoint1);
+    txPoint1->initWithString(strPoint1,"Times New Roman",24);
+    textSumPoint1->setTexture(txPoint1);
+    
+    
+    CCTexture2D *txPoint2=new CCTexture2D();
+    char strPoint2[20] ={0};
+    sprintf(strPoint2, "%i",sumPoint2);
+    txPoint2->initWithString(strPoint2,"Times New Roman",24);
+    textSumPoint2->setTexture(txPoint2);
+
+
 }
 void HelloWorld::accelerometer(cocos2d::CCAcceleration *accelerometer,  cocos2d::CCAcceleration *acceleration)
 {
@@ -380,7 +565,8 @@ void HelloWorld::accelerometer(cocos2d::CCAcceleration *accelerometer,  cocos2d:
 }
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)
 {
-    if (_mouseJoint != NULL) return;
+    if (_mouseJoint != NULL && _mouseJoint2 != NULL) return;
+    //if (_mouseJoint2 != NULL) return;
     
     CCTouch *touch1 = (CCTouch*)(touches->anyObject());
 	CCPoint p2 = touch1->getLocationInView();
@@ -394,23 +580,47 @@ void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event
         md.bodyB = _paddleBody;
         md.target = locationWorld;
         md.collideConnected = true;
-        md.maxForce = 1000.0f * _paddleBody->GetMass();
+        md.maxForce = 100.0f * _paddleBody->GetMass();
         
         _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
         _paddleBody->SetAwake(true);
     }
+    
+    if (_paddleFixture2->TestPoint(locationWorld)) {
+        b2MouseJointDef md;
+        md.bodyA = groundBody;
+        md.bodyB = _paddleBody2;
+        md.target = locationWorld;
+        md.collideConnected = true;
+        md.maxForce = 100.0f * _paddleBody2->GetMass();
+        
+        _mouseJoint2 = (b2MouseJoint *)world->CreateJoint(&md);
+        _paddleBody2->SetAwake(true);
+    }
 }
 void HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)
 {
-    if (_mouseJoint == NULL) return;
+    CCSize s = CCDirector::sharedDirector()->getWinSize();
+    if (_mouseJoint == NULL && _mouseJoint2 == NULL ) return;
     
     CCTouch *touch1 = (CCTouch*)(touches->anyObject());
 	CCPoint p2 = touch1->getLocationInView();
 	CCPoint location=CCDirector::sharedDirector()->convertToGL(p2);
     
-    b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
+    if (location.y < s.height/2 - s.height/20 && _mouseJoint != NULL)
+    {
+        b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
+        
+        _mouseJoint->SetTarget(locationWorld);
+    }
     
-    _mouseJoint->SetTarget(locationWorld);
+    if (location.y >= s.height/2 +s.height/20 && _mouseJoint2 != NULL)
+    {
+        b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
+        
+        _mouseJoint2->SetTarget(locationWorld);
+    }
+    
 }
 void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
@@ -436,6 +646,11 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
     if (_mouseJoint) {
         world->DestroyJoint(_mouseJoint);
         _mouseJoint = NULL;
+    }
+    
+    if (_mouseJoint2) {
+        world->DestroyJoint(_mouseJoint2);
+        _mouseJoint2 = NULL;
     }
     
     

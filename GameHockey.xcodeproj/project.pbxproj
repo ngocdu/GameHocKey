@@ -288,6 +288,9 @@
 		DC675A7317681CB900F0C732 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC675A7217681CB900F0C732 /* HelloWorldScene.cpp */; };
 		DC675A7517681CB900F0C732 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = DC675A7417681CB900F0C732 /* blocks.png */; };
 		DC675A7D17681DCF00F0C732 /* CCDataVisitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC675A7B17681DCF00F0C732 /* CCDataVisitor.cpp */; };
+		DC8B39D9176972C7000FD313 /* LongGreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8B39D7176972C7000FD313 /* LongGreen2.png */; };
+		DC8B39DA176972C7000FD313 /* LongRed2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8B39D8176972C7000FD313 /* LongRed2.png */; };
+		DC8B39DD17697DDB000FD313 /* MyContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -893,6 +896,10 @@
 		DC675A7417681CB900F0C732 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		DC675A7B17681DCF00F0C732 /* CCDataVisitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCDataVisitor.cpp; sourceTree = "<group>"; };
 		DC675A7C17681DCF00F0C732 /* CCDataVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDataVisitor.h; sourceTree = "<group>"; };
+		DC8B39D7176972C7000FD313 /* LongGreen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LongGreen2.png; sourceTree = "<group>"; };
+		DC8B39D8176972C7000FD313 /* LongRed2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LongRed2.png; sourceTree = "<group>"; };
+		DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyContactListener.cpp; sourceTree = "<group>"; };
+		DC8B39DC17697DDB000FD313 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -963,6 +970,8 @@
 		DC6756DA17681CA600F0C732 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DC8B39D7176972C7000FD313 /* LongGreen2.png */,
+				DC8B39D8176972C7000FD313 /* LongRed2.png */,
 				DC55C2E5176870F300AD6B03 /* paddle-hd.png */,
 				DC55C2E6176870F300AD6B03 /* paddle.png */,
 				DC55C2E7176870F300AD6B03 /* ball.png */,
@@ -2090,6 +2099,8 @@
 		DC675A6D17681CB900F0C732 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */,
+				DC8B39DC17697DDB000FD313 /* MyContactListener.h */,
 				DC675A7B17681DCF00F0C732 /* CCDataVisitor.cpp */,
 				DC675A7C17681DCF00F0C732 /* CCDataVisitor.h */,
 				DC675A6E17681CB900F0C732 /* AppDelegate.h */,
@@ -2168,6 +2179,8 @@
 				DC55C2EA176870F300AD6B03 /* paddle.png in Resources */,
 				DC55C2EB176870F300AD6B03 /* ball.png in Resources */,
 				DC55C2EC176870F300AD6B03 /* ball-hd.png in Resources */,
+				DC8B39D9176972C7000FD313 /* LongGreen2.png in Resources */,
+				DC8B39DA176972C7000FD313 /* LongRed2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2431,6 +2444,7 @@
 				DC675A7017681CB900F0C732 /* AppDelegate.cpp in Sources */,
 				DC675A7317681CB900F0C732 /* HelloWorldScene.cpp in Sources */,
 				DC675A7D17681DCF00F0C732 /* CCDataVisitor.cpp in Sources */,
+				DC8B39DD17697DDB000FD313 /* MyContactListener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
