@@ -70,7 +70,7 @@ CCAffineTransform PhysicsSprite::nodeToParentTransform(void)
 HelloWorld::HelloWorld()
 {
     setTouchEnabled( true );
-    setAccelerometerEnabled( true );
+    //setAccelerometerEnabled( true );
 
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     // init physics
@@ -80,7 +80,8 @@ HelloWorld::HelloWorld()
     //-----------------------add background , gol --------------------------
     //CCSprite *bg = CCSprite::create("");
     gol1 = CCSprite::create("LongRed2.png");
-    gol1->setPosition(ccp(s.width/2,10));;
+    gol1->setPosition(ccp(s.width/2,10));
+    gol1->setScaleX(2);
     gol1->setTag(5);
     this->addChild(gol1);
     
@@ -93,7 +94,7 @@ HelloWorld::HelloWorld()
     
     // Create gol1 shape
     b2PolygonShape gol1Shape;
-    gol1Shape.SetAsBox(gol1->getContentSize().width/PTM_RATIO/2,
+    gol1Shape.SetAsBox(gol1->getContentSize().width/PTM_RATIO,
                          gol1->getContentSize().height/PTM_RATIO/2);
     
     // Create shape definition and add to body
@@ -108,6 +109,7 @@ HelloWorld::HelloWorld()
     gol2 = CCSprite::create("LongGreen2.png");
     gol2->setPosition(ccp(s.width/2,s.height-5));
     gol2->setTag(6);
+    gol2->setScaleX(2);
     this->addChild(gol2);
     
     // Create gol1 body
@@ -119,7 +121,7 @@ HelloWorld::HelloWorld()
     
     // Create gol2 shape
     b2PolygonShape gol2Shape;
-    gol2Shape.SetAsBox(gol2->getContentSize().width/PTM_RATIO/2,
+    gol2Shape.SetAsBox(gol2->getContentSize().width/PTM_RATIO,
                        gol2->getContentSize().height/PTM_RATIO/2);
     
     // Create shape definition and add to body
@@ -212,9 +214,9 @@ HelloWorld::HelloWorld()
     // Create shape definition and add to body
     b2FixtureDef paddleShapeDef;
     paddleShapeDef.shape = &paddleShape;
-    paddleShapeDef.density = 10.0f;
-    paddleShapeDef.friction = 0.8f;
-    paddleShapeDef.restitution = 0.4f;
+    paddleShapeDef.density = 100.0f;
+    paddleShapeDef.friction = 0.9f;
+    paddleShapeDef.restitution = 0.05f;
     _paddleFixture = _paddleBody->CreateFixture(&paddleShapeDef);
     //----------------------------------------------------------
     //---------------------------------paddle2--------------------------------
@@ -240,9 +242,9 @@ HelloWorld::HelloWorld()
     // Create shape definition and add to body
     b2FixtureDef paddleShapeDef2;
     paddleShapeDef2.shape = &paddleShape2; //hinh dang
-    paddleShapeDef2.density = 10.0f; //mat do cai nay de quy dinh trong luong cua vat
-    paddleShapeDef2.friction = 0.8f; //ma sat
-    paddleShapeDef2.restitution = 0.4f; //su nay - dan hoi
+    paddleShapeDef2.density = 100.0f; //mat do cai nay de quy dinh trong luong cua vat
+    paddleShapeDef2.friction = 0.9f; //ma sat
+    paddleShapeDef2.restitution = 0.05f; //su nay - dan hoi
     _paddleFixture2 = _paddleBody2->CreateFixture(&paddleShapeDef2);
     //----------------------------------------------------------
     
@@ -418,15 +420,23 @@ void HelloWorld::update(float dt)
             CCSprite* myActor = (CCSprite*)b->GetUserData();
             
             if (myActor->getTag()==2 ) {
-                if (b->GetPosition().y * PTM_RATIO < s.height/2 - s.height/20) {
+                if (b->GetPosition().y * PTM_RATIO < s.height/2 ) {
                     myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+                }
+                else if(b->GetPosition().y * PTM_RATIO == s.height/2)
+                {
+                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, -30 + b->GetPosition().y * PTM_RATIO) );
                 }
                 
             }
             else if (myActor->getTag()==3)
             {
-                if (b->GetPosition().y * PTM_RATIO > s.height/2 + s.height/20) {
+                if (b->GetPosition().y * PTM_RATIO > s.height/2 ) {
                     myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
+                }
+                else if(b->GetPosition().y * PTM_RATIO == s.height/2)
+                {
+                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, 30 + b->GetPosition().y * PTM_RATIO) );
                 }
             }
             else
@@ -557,7 +567,7 @@ void HelloWorld::update(float dt)
 
 
 }
-void HelloWorld::accelerometer(cocos2d::CCAcceleration *accelerometer,  cocos2d::CCAcceleration *acceleration)
+void HelloWorld::accelerometer(cocos2d::CCAccelerometer *acceleromet,  cocos2d::CCAcceleration *acceleration)
 {
     // Landscape left values
     b2Vec2 gravity(acceleration->y * 30, -acceleration->x * 30);
@@ -565,7 +575,7 @@ void HelloWorld::accelerometer(cocos2d::CCAcceleration *accelerometer,  cocos2d:
 }
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)
 {
-    if (_mouseJoint != NULL && _mouseJoint2 != NULL) return;
+    if (_mouseJoint != NULL || _mouseJoint2 != NULL) return;
     //if (_mouseJoint2 != NULL) return;
     
     CCTouch *touch1 = (CCTouch*)(touches->anyObject());
@@ -580,7 +590,7 @@ void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event
         md.bodyB = _paddleBody;
         md.target = locationWorld;
         md.collideConnected = true;
-        md.maxForce = 100.0f * _paddleBody->GetMass();
+        md.maxForce = 10000.0f * _paddleBody->GetMass();
         
         _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
         _paddleBody->SetAwake(true);
@@ -592,7 +602,7 @@ void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event
         md.bodyB = _paddleBody2;
         md.target = locationWorld;
         md.collideConnected = true;
-        md.maxForce = 100.0f * _paddleBody2->GetMass();
+        md.maxForce = 10000.0f * _paddleBody2->GetMass();
         
         _mouseJoint2 = (b2MouseJoint *)world->CreateJoint(&md);
         _paddleBody2->SetAwake(true);
@@ -607,14 +617,14 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event
 	CCPoint p2 = touch1->getLocationInView();
 	CCPoint location=CCDirector::sharedDirector()->convertToGL(p2);
     
-    if (location.y < s.height/2 - s.height/20 && _mouseJoint != NULL)
+    if (location.y <= s.height/2  && _mouseJoint != NULL)
     {
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
         
         _mouseJoint->SetTarget(locationWorld);
     }
     
-    if (location.y >= s.height/2 +s.height/20 && _mouseJoint2 != NULL)
+    if (location.y >= s.height/2  && _mouseJoint2 != NULL)
     {
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
         
