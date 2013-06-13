@@ -2,8 +2,6 @@
 //  HelloWorldScene.cpp
 //  GameHockey
 //
-//  Created by MinhNT on 13/06/12.
-//  Copyright __MyCompanyName__ 2013年. All rights reserved.
 //
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"

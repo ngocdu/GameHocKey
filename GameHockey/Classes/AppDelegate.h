@@ -2,8 +2,6 @@
 //  GameHockeyAppDelegate.h
 //  GameHockey
 //
-//  Created by MinhNT on 13/06/12.
-//  Copyright __MyCompanyName__ 2013年. All rights reserved.
 //
 
 #ifndef  _APP_DELEGATE_H_

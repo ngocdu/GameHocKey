@@ -1,8 +1,5 @@
 //
 //  MyContactListener.h
-//  Sample-Box2D
-//
-//  Created by Trung Kien Do on 13/05/25.
 //
 //
 

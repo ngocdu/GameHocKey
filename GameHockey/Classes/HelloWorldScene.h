@@ -2,8 +2,6 @@
 //  HelloWorldScene.h
 //  GameHockey
 //
-//  Created by MinhNT on 13/06/12.
-//  Copyright __MyCompanyName__ 2013年. All rights reserved.
 //
 #ifndef __HELLO_WORLD_H__
 #define __HELLO_WORLD_H__
