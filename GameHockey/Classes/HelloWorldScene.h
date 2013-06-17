@@ -59,8 +59,8 @@ private:
     b2Body *_paddleBody2;
     b2Fixture *_paddleFixture2;
     
-    b2MouseJoint *_mouseJoint;
-    b2MouseJoint *_mouseJoint2;
+    //b2MouseJoint *_mouseJoint;
+    //b2MouseJoint *_mouseJoint2;
     
     
     cocos2d::CCSprite *gol1;
@@ -76,6 +76,8 @@ private:
     cocos2d:: CCSprite * textSumPoint2;
     
     MyContactListener *_contactListener;
+    
+    cocos2d::CCArray *touchJointList;
 };
 
 #endif // __HELLO_WORLD_H__

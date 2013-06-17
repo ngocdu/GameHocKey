@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "506"
-         endingLineNumber = "506"
+         startingLineNumber = "540"
+         endingLineNumber = "540"
          landmarkName = "HelloWorld::update(float dt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "505"
-         endingLineNumber = "505"
+         startingLineNumber = "539"
+         endingLineNumber = "539"
          landmarkName = "HelloWorld::update(float dt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "509"
-         endingLineNumber = "509"
+         startingLineNumber = "543"
+         endingLineNumber = "543"
          landmarkName = "HelloWorld::update(float dt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "528"
-         endingLineNumber = "528"
+         startingLineNumber = "562"
+         endingLineNumber = "562"
          landmarkName = "HelloWorld::update(float dt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "532"
-         endingLineNumber = "532"
+         startingLineNumber = "566"
+         endingLineNumber = "566"
          landmarkName = "HelloWorld::update(float dt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,63 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "581"
-         endingLineNumber = "581"
-         landmarkName = "HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "622"
-         endingLineNumber = "622"
-         landmarkName = "HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "630"
-         endingLineNumber = "630"
-         landmarkName = "HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "629"
-         endingLineNumber = "629"
-         landmarkName = "HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "573"
-         endingLineNumber = "573"
+         startingLineNumber = "607"
+         endingLineNumber = "607"
          landmarkName = "HelloWorld::accelerometer(cocos2d::CCAccelerometer *acceleromet, cocos2d::CCAcceleration *acceleration)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +86,26 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "392805167.540093"
+         timestampString = "393159388.142754"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "570"
-         endingLineNumber = "570">
+         startingLineNumber = "604"
+         endingLineNumber = "604"
+         landmarkName = "HelloWorld::accelerometer(cocos2d::CCAccelerometer *acceleromet, cocos2d::CCAcceleration *acceleration)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GameHockey/Classes/HelloWorldScene.cpp"
+         timestampString = "393159388.142754"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "747"
+         endingLineNumber = "747"
+         landmarkName = "HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

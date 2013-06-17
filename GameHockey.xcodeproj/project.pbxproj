@@ -291,6 +291,7 @@
 		DC8B39D9176972C7000FD313 /* LongGreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8B39D7176972C7000FD313 /* LongGreen2.png */; };
 		DC8B39DA176972C7000FD313 /* LongRed2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8B39D8176972C7000FD313 /* LongRed2.png */; };
 		DC8B39DD17697DDB000FD313 /* MyContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */; };
+		DCF61D9A176F0BFE00B0B46D /* CCTouchJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCF61D99176F0BFD00B0B46D /* CCTouchJoint.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -900,6 +901,8 @@
 		DC8B39D8176972C7000FD313 /* LongRed2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LongRed2.png; sourceTree = "<group>"; };
 		DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyContactListener.cpp; sourceTree = "<group>"; };
 		DC8B39DC17697DDB000FD313 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
+		DCF61D98176F0BF000B0B46D /* CCTouchJoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCTouchJoint.h; sourceTree = "<group>"; };
+		DCF61D99176F0BFD00B0B46D /* CCTouchJoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTouchJoint.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2107,6 +2110,8 @@
 				DC675A6F17681CB900F0C732 /* AppDelegate.cpp */,
 				DC675A7117681CB900F0C732 /* HelloWorldScene.h */,
 				DC675A7217681CB900F0C732 /* HelloWorldScene.cpp */,
+				DCF61D98176F0BF000B0B46D /* CCTouchJoint.h */,
+				DCF61D99176F0BFD00B0B46D /* CCTouchJoint.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2445,6 +2450,7 @@
 				DC675A7317681CB900F0C732 /* HelloWorldScene.cpp in Sources */,
 				DC675A7D17681DCF00F0C732 /* CCDataVisitor.cpp in Sources */,
 				DC8B39DD17697DDB000FD313 /* MyContactListener.cpp in Sources */,
+				DCF61D9A176F0BFE00B0B46D /* CCTouchJoint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2455,7 +2461,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nguyen Ngoc Du (6676428KEN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nguyen Ngoc Du (6676428KEN)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2479,7 +2486,9 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "FB85090B-919B-4BB0-9575-9DD6583076B9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FB85090B-919B-4BB0-9575-9DD6583076B9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2489,7 +2498,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nguyen Ngoc Du (6676428KEN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nguyen Ngoc Du (6676428KEN)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -2510,8 +2520,10 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "FB85090B-919B-4BB0-9575-9DD6583076B9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FB85090B-919B-4BB0-9575-9DD6583076B9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

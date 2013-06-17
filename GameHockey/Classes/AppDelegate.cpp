@@ -20,6 +20,7 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate()
 {
+    
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
@@ -27,6 +28,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
+    
+    
 
     // turn on display FPS
     pDirector->setDisplayStats(true);
@@ -39,7 +42,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // run
     pDirector->runWithScene(pScene);
-
+    
+    // Enables the multi-touch
+	//[glView setMultipleTouchEnabled:YES];
     return true;
 }
 

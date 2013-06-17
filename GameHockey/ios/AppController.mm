@@ -23,26 +23,26 @@
 
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
     // Override point for customization after application launch.
-
+    
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     EAGLView *__glView = [EAGLView viewWithFrame: [window bounds]
                                      pixelFormat: kEAGLColorFormatRGBA8
                                      depthFormat: GL_DEPTH_COMPONENT16
                               preserveBackbuffer: NO
-                                      sharegroup: nil
-                                   multiSampling: NO
-                                 numberOfSamples:0 ];
-
+                                      sharegroup:nil
+                                   multiSampling:NO
+                                 numberOfSamples:0];
+    
     // Use RootViewController manage EAGLView
     viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
     viewController.wantsFullScreenLayout = YES;
     viewController.view = __glView;
-
+    [__glView setMultipleTouchEnabled:YES];             // Multitouch
+    
     // Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
@@ -56,12 +56,52 @@ static AppDelegate s_sharedApplication;
     }
     
     [window makeKeyAndVisible];
-
+    
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
-
+    
     cocos2d::CCApplication::sharedApplication()->run();
     return YES;
 }
+
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//
+//    // Override point for customization after application launch.
+//
+//    // Add the view controller's view to the window and display.
+//    window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+//    EAGLView *__glView = [EAGLView viewWithFrame: [window bounds]
+//                                     pixelFormat: kEAGLColorFormatRGBA8
+//                                     depthFormat: GL_DEPTH_COMPONENT16
+//                              preserveBackbuffer: NO
+//                                      sharegroup: nil
+//                                   multiSampling: NO
+//                                 numberOfSamples:0 ];
+//
+//    // Use RootViewController manage EAGLView
+//    viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
+//    viewController.wantsFullScreenLayout = YES;
+//    viewController.view = __glView;
+//    [__glView setMultipleTouchEnabled:YES];             // Multitouch
+//
+//    // Set RootViewController to window
+//    if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
+//    {
+//        // warning: addSubView doesn't work on iOS6
+//        [window addSubview: viewController.view];
+//    }
+//    else
+//    {
+//        // use this method on ios6
+//        [window setRootViewController:viewController];
+//    }
+//    
+//    [window makeKeyAndVisible];
+//
+//    [[UIApplication sharedApplication] setStatusBarHidden: YES];
+//
+//    cocos2d::CCApplication::sharedApplication()->run();
+//    return YES;
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
