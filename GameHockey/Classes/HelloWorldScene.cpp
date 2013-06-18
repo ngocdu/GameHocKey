@@ -70,9 +70,6 @@ HelloWorld::HelloWorld()
 {
     setTouchEnabled( true );
     setAccelerometerEnabled( true );
-    //this->setMultipleTouchEnabled(true);
-    //CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 0);
-    //CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 0);
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     // init physics
     this->initPhysics();
@@ -89,13 +86,16 @@ HelloWorld::HelloWorld()
     // Create gol1 body
     b2BodyDef rBodyDef;
     rBodyDef.type = b2_staticBody;
-    rBodyDef.position.Set(s.width/2/PTM_RATIO, 10/PTM_RATIO);
-    rBodyDef.userData = gol1;
+    rBodyDef.position.Set(s.width/2/PTM_RATIO, s.height/2/PTM_RATIO);
+    rBodyDef.userData = r;
+    rBodyDef.linearDamping = 10000.0f;
+    
+    rBodyDef.angularDamping = 10000.0f;
     b2Body *body_r = world->CreateBody(&rBodyDef);
     
     // Create gol1 shape
     b2PolygonShape rShape;
-    rShape.SetAsBox(r->getContentSize().width/PTM_RATIO,
+    rShape.SetAsBox(r->getContentSize().width*10/PTM_RATIO,
                        r->getContentSize().height/PTM_RATIO/2);
     
     // Create shape definition and add to body
@@ -103,9 +103,10 @@ HelloWorld::HelloWorld()
     rShapeDef.shape = &rShape;
     rShapeDef.density = 10.0f;
     rShapeDef.friction = 0.4f;
-    rShapeDef.restitution = 0.1f;
+    rShapeDef.restitution = 0.0f;
+    
     rShapeDef.filter.groupIndex = -10;
-    b2Fixture *r_Fixture = body_r->CreateFixture(&rShapeDef);
+    body_r->CreateFixture(&rShapeDef);
     
     //-----------------------add background , gol --------------------------
     //CCSprite *bg = CCSprite::create("");
@@ -120,6 +121,9 @@ HelloWorld::HelloWorld()
     gol1BodyDef.type = b2_staticBody;
     gol1BodyDef.position.Set(s.width/2/PTM_RATIO, 10/PTM_RATIO);
     gol1BodyDef.userData = gol1;
+    gol1BodyDef.linearDamping = 10000.0f;
+    
+    gol1BodyDef.angularDamping = 10000.0f;
     body_gol1 = world->CreateBody(&gol1BodyDef);
     
     // Create gol1 shape
@@ -132,7 +136,8 @@ HelloWorld::HelloWorld()
     gol1ShapeDef.shape = &gol1Shape;
     gol1ShapeDef.density = 10.0f;
     gol1ShapeDef.friction = 0.4f;
-    gol1ShapeDef.restitution = 0.1f;
+    gol1ShapeDef.restitution = 0.0f;
+    gol1ShapeDef.filter.groupIndex = 10;
     gol1_Fixture = body_gol1->CreateFixture(&gol1ShapeDef);
     
     
@@ -147,6 +152,9 @@ HelloWorld::HelloWorld()
     gol2BodyDef.type = b2_staticBody;
     gol2BodyDef.position.Set(s.width/2/PTM_RATIO, (s.height-5)/PTM_RATIO);
     gol2BodyDef.userData = gol2;
+    gol2BodyDef.linearDamping = 10000.0f;
+    
+    gol2BodyDef.angularDamping = 10000.0f;
     body_gol2 = world->CreateBody(&gol2BodyDef);
     
     // Create gol2 shape
@@ -159,7 +167,8 @@ HelloWorld::HelloWorld()
     gol2ShapeDef.shape = &gol2Shape;
     gol2ShapeDef.density = 10.0f;
     gol2ShapeDef.friction = 0.4f;
-    gol2ShapeDef.restitution = 0.1f;
+    gol2ShapeDef.restitution = 0.0f;
+    gol2ShapeDef.filter.groupIndex = 10;
     gol2_Fixture = body_gol2->CreateFixture(&gol2ShapeDef);
     
     
@@ -217,8 +226,8 @@ HelloWorld::HelloWorld()
     b2FixtureDef ballShapeDef;
     ballShapeDef.shape = &circle;
     ballShapeDef.density = 1.0f;
-    ballShapeDef.friction = 0.3f;
-    ballShapeDef.restitution = 1.0f;
+    ballShapeDef.friction = 0.4f;
+    ballShapeDef.restitution = 0.5f;
     ballShapeDef.filter.groupIndex = -10;
     _body->CreateFixture(&ballShapeDef);
     //----------------------------------------------------------------------
@@ -235,6 +244,10 @@ HelloWorld::HelloWorld()
     paddleBodyDef.type = b2_dynamicBody;
     paddleBodyDef.position.Set(s.width/2/PTM_RATIO, 50/PTM_RATIO);
     paddleBodyDef.userData = paddle;
+    paddleBodyDef.linearDamping = 10000.0f;
+    
+    paddleBodyDef.angularDamping = 10000.0f;
+
     _paddleBody = world->CreateBody(&paddleBodyDef);
     
     // Create paddle shape
@@ -245,10 +258,9 @@ HelloWorld::HelloWorld()
     // Create shape definition and add to body
     b2FixtureDef paddleShapeDef;
     paddleShapeDef.shape = &paddleShape;
-    paddleShapeDef.density = 100.0f;
-    paddleShapeDef.friction = 0.9f;
-    
-    paddleShapeDef.restitution = 0.05f;
+    paddleShapeDef.density = 10.0f;
+    paddleShapeDef.friction = 0.4f;
+    paddleShapeDef.restitution = 0.0f;
     _paddleFixture = _paddleBody->CreateFixture(&paddleShapeDef);
     //----------------------------------------------------------
     //---------------------------------paddle2--------------------------------
@@ -264,6 +276,10 @@ HelloWorld::HelloWorld()
     paddleBodyDef2.type = b2_dynamicBody;
     paddleBodyDef2.position.Set(s.width/2/PTM_RATIO, (s.height-50)/PTM_RATIO);
     paddleBodyDef2.userData = paddle2;
+    paddleBodyDef2.linearDamping = 10000.0f;
+    
+    paddleBodyDef2.angularDamping = 10000.0f;
+
     _paddleBody2 = world->CreateBody(&paddleBodyDef2);
     
     // Create paddle shape
@@ -274,37 +290,22 @@ HelloWorld::HelloWorld()
     // Create shape definition and add to body
     b2FixtureDef paddleShapeDef2;
     paddleShapeDef2.shape = &paddleShape2; //hinh dang
-    paddleShapeDef2.density = 100.0f; //mat do cai nay de quy dinh trong luong cua vat
-    paddleShapeDef2.friction = 0.9f; //ma sat
-    paddleShapeDef2.restitution = 0.05f; //su nay - dan hoi
+    paddleShapeDef2.density = 10.0f; //mat do cai nay de quy dinh trong luong cua vat
+    paddleShapeDef2.friction = 0.4f; //ma sat
+    paddleShapeDef2.restitution = 0.0f; //su nay - dan hoi
     _paddleFixture2 = _paddleBody2->CreateFixture(&paddleShapeDef2);
     //----------------------------------------------------------
-    
-    //---------------------gioi han chi cho di chuyen theo truc Ox --------------------------------
-    // Restrict paddle along the x axis
-//    b2PrismaticJointDef jointDef;
-//    b2Vec2 worldAxis(1.0f, 0.0f);
-//    jointDef.collideConnected = true;
-//    jointDef.Initialize(_paddleBody, groundBody,_paddleBody->GetWorldCenter(), worldAxis);
-//    world->CreateJoint(&jointDef);
-    //-----------------------------------------------------------
 }
-
 HelloWorld::~HelloWorld()
 {
     delete world;
     world = NULL;
-    
-    //delete m_debugDraw;
-    
-    //----------------ball
     _body = NULL;
     groundBody = NULL;
 }
 
 void HelloWorld::initPhysics()
 {
-
     CCSize s = CCDirector::sharedDirector()->getWinSize();
 
     b2Vec2 gravity;
@@ -315,23 +316,12 @@ void HelloWorld::initPhysics()
     world->SetAllowSleeping(true);
 
     world->SetContinuousPhysics(true);
-    
-    
+
     _contactListener = new MyContactListener();
     world->SetContactListener(_contactListener);
 
-    // m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-    // world->SetDebugDraw(m_debugDraw);
-
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
-    //        flags += b2Draw::e_jointBit;
-    //        flags += b2Draw::e_aabbBit;
-    //        flags += b2Draw::e_pairBit;
-    //        flags += b2Draw::e_centerOfMassBit;
-    //m_debugDraw->SetFlags(flags);
-
-
     // Define the ground body.
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0, 0); // bottom-left corner
@@ -451,37 +441,16 @@ void HelloWorld::update(float dt)
             //Synchronize the AtlasSprites position and rotation with the corresponding body
             CCSprite* myActor = (CCSprite*)b->GetUserData();
             
-            if (myActor->getTag()==2 ) {
-                if (b->GetPosition().y * PTM_RATIO < s.height/2 ) {
+            if (myActor->getTag()==2 || myActor->getTag()==3) {
                     myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
-                }
-                else if(b->GetPosition().y * PTM_RATIO == s.height/2)
-                {
-                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, -30 + b->GetPosition().y * PTM_RATIO) );
-                }
-                
-            }
-            else if (myActor->getTag()==3)
-            {
-                if (b->GetPosition().y * PTM_RATIO > s.height/2 ) {
-                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
-                }
-                else if(b->GetPosition().y * PTM_RATIO == s.height/2)
-                {
-                    myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, 30 + b->GetPosition().y * PTM_RATIO) );
-                }
             }
             else
             {
                 myActor->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );
                 myActor->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
             }
-            
-            
         }    
     }
-    
-    
     
     //---------------------------ball---------------------
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
@@ -499,35 +468,18 @@ void HelloWorld::update(float dt)
                     b->SetLinearDamping(0.5);
                 } else if (speed < maxSpeed) {
                     b->SetLinearDamping(0.0);
-                }
-                
+                } 
             }
-            
-            
-            
-            if (sprite->getTag()==2 ) {
-                if (b->GetPosition().y * PTM_RATIO <= s.height/2 - s.height/20) {
+            if (sprite->getTag()==2 || sprite->getTag()==3) {
                     sprite->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
-                }
-                
-            }
-            else if (sprite->getTag()==3)
-            {
-                if (b->GetPosition().y * PTM_RATIO >= s.height/2 + s.height/20) {
-                    sprite->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
-                }
             }
             else
             {
                 sprite->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()) );
                 sprite->setPosition( CCPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO) );
             }
-
-            
         }
     }
-    
-    
     std::vector<b2Body *>toDestroy;
     std:vector<MyContact>::iterator pos;
     
@@ -582,34 +534,27 @@ void HelloWorld::update(float dt)
             }
         }
     }
-    
-    
+
     CCTexture2D *txPoint1=new CCTexture2D();
     char strPoint1[20] ={0};
     sprintf(strPoint1, "%i",sumPoint1);
     txPoint1->initWithString(strPoint1,"Times New Roman",24);
     textSumPoint1->setTexture(txPoint1);
     
-    
     CCTexture2D *txPoint2=new CCTexture2D();
     char strPoint2[20] ={0};
     sprintf(strPoint2, "%i",sumPoint2);
     txPoint2->initWithString(strPoint2,"Times New Roman",24);
     textSumPoint2->setTexture(txPoint2);
-
-
 }
 void HelloWorld::accelerometer(cocos2d::CCAccelerometer *acceleromet,  cocos2d::CCAcceleration *acceleration)
 {
-    // Landscape left values
     b2Vec2 gravity(acceleration->y * 30, -acceleration->x * 30);
     world->SetGravity(gravity);
 }
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)
 {
     CCSize s = CCDirector::sharedDirector()->getWinSize();
-    //if (_mouseJoint != NULL || _mouseJoint2 != NULL) return;
-      
     CCSetIterator it;
     CCTouch* touch;
     for( it = touches->begin(); it != touches->end(); it++)// get all touch point
@@ -619,11 +564,7 @@ void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event
             continue;
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
-    
-        printf( "ccTouchesBegan id:%i %i,%i\n", touch->getID(), (int)location.x, (int)location.y );
-        
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-    
         if (_paddleFixture->TestPoint(locationWorld)) {
         b2MouseJointDef md;
         md.bodyA = groundBody;
@@ -631,17 +572,14 @@ void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event
         md.target = locationWorld;
         md.collideConnected = true;
         md.maxForce = 10000.0f * _paddleBody->GetMass();
-        md.frequencyHz =1000;
+        md.dampingRatio = 0;
+        md.frequencyHz =100000;
         b2MouseJoint *_mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
         _paddleBody->SetAwake(true);
             
         CCTouchJoint * tj = new CCTouchJoint(_mouseJoint,touch);
-            if (location.y < s.height/2 ) {
-                tj->setDirection(1);
-            }
-        touchJointList->addObject(tj);
+                   touchJointList->addObject(tj);
         }
-    
         if (_paddleFixture2->TestPoint(locationWorld)) {
         b2MouseJointDef md;
         md.bodyA = groundBody;
@@ -649,27 +587,18 @@ void HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event
         md.target = locationWorld;
         md.collideConnected = true;
         md.maxForce = 10000.0f * _paddleBody2->GetMass();
-        md.frequencyHz = 1000;
+        md.dampingRatio = 0;
+        md.frequencyHz = 100000;
         b2MouseJoint *_mouseJoint2 = (b2MouseJoint *)world->CreateJoint(&md);
         _paddleBody2->SetAwake(true);
-            
         CCTouchJoint * tj = new CCTouchJoint(_mouseJoint2,touch);
-            if (location.y > s.height/2 ) {
-                tj->setDirection(2);
-            }
         touchJointList->addObject(tj);
+    }   
     }
-        
-    }
- 
-
 }
 void HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)
 {
     CCSize s = CCDirector::sharedDirector()->getWinSize();
-   // if (_mouseJoint == NULL && _mouseJoint2 == NULL ) return;
-    
-    
     CCSetIterator it;
     CCTouch* touch;
     for( it = touches->begin(); it != touches->end(); it++)// get all touch point
@@ -679,73 +608,49 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event
         continue;
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
-        printf( "ccTouchesmove id:%i %i,%i\n", touch->getID(), (int)location.x, (int)location.y );
-
         CCObject *i;
         CCARRAY_FOREACH(touchJointList, i)
         {
             CCTouchJoint * tj = (CCTouchJoint*)i;
-            //if([tj.touch phase] == UITouchPhaseMoved)
-            if (location.y <= s.height/2  && tj->getMouseJoint() != NULL && tj->getDirection()==1)
+            if ( tj->getMouseJoint() != NULL )
             {
-                // Update if it is moved
-                //CCPoint location = [tj.touch locationInView:tj.touch.view];
                 CCPoint location = tj->getTouch()->getLocationInView();
-                //location = [[CCDirector sharedDirector] convertToGL:location];
                 location = CCDirector::sharedDirector()->convertToGL(location);
                 
                 b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
                 
                 tj->getMouseJoint()->SetTarget(locationWorld);
             }
-            else if (location.y > s.height/2  && tj->getMouseJoint() != NULL && tj->getDirection()==2)
+            else if ( tj->getMouseJoint() != NULL )
             {
                 CCPoint location = tj->getTouch()->getLocationInView();
-                //location = [[CCDirector sharedDirector] convertToGL:location];
                 location = CCDirector::sharedDirector()->convertToGL(location);
-                
                 b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-                
                 tj->getMouseJoint()->SetTarget(locationWorld);
-
             }
         }
-        
-    }
-    
+    } 
 }
 void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
-    //Add a new body/atlas sprite at the touched location
     CCSetIterator it;
     CCTouch* touch;
     CCArray * discardedItems =  new CCArray();
     for( it = touches->begin(); it != touches->end(); it++) 
     {
         touch = (CCTouch*)(*it);
-        
         if(!touch)
             break;
-        
         CCPoint location = touch->getLocationInView();
-        
         location = CCDirector::sharedDirector()->convertToGL(location);
-        
         CCObject *i;
-        //for (CCTouchJoint *tj in touchJointList)
         CCARRAY_FOREACH(touchJointList, i)
         {
             CCTouchJoint *tj = (CCTouchJoint*)i;
             if (tj->getTouch() == touch)
             {
-                // Defensive programming - assertion
-                //NSAssert([tj isKindOfClass:[CCTouchJoint class]], @"node is not a touchJoint!");
-                
-                // If safe - loop through
-                //if ([tj.touch phase] == UITouchPhaseEnded)
                 {
                     discardedItems->addObject(tj);
-                    
                     tj->destroyJoint();
                     tj->release();
                 }
@@ -753,20 +658,12 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
         }
         touchJointList->removeObjectsInArray(discardedItems);
     }
-    
-    
-
 }
-
 CCScene* HelloWorld::scene()
 {
-    // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
-    
-    // add layer as a child to scene
     CCLayer* layer = new HelloWorld();
     scene->addChild(layer);
     layer->release();
-    
     return scene;
 }
