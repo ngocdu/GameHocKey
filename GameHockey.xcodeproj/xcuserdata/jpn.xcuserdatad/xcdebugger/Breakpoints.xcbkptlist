@@ -51,9 +51,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "555"
-         endingLineNumber = "555"
-         landmarkName = "HelloWorld::update(float dt)"
-         landmarkType = "5">
+         endingLineNumber = "555">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -65,7 +63,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "559"
          endingLineNumber = "559"
-         landmarkName = "HelloWorld::update(float dt)"
+         landmarkName = "HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -78,7 +76,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "600"
          endingLineNumber = "600"
-         landmarkName = "HelloWorld::accelerometer(cocos2d::CCAccelerometer *acceleromet, cocos2d::CCAcceleration *acceleration)"
+         landmarkName = "HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -91,7 +89,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "597"
          endingLineNumber = "597"
-         landmarkName = "HelloWorld::accelerometer(cocos2d::CCAccelerometer *acceleromet, cocos2d::CCAcceleration *acceleration)"
+         landmarkName = "HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -99,12 +97,62 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GameHockey/Classes/HelloWorldScene.cpp"
-         timestampString = "393232925.937313"
+         timestampString = "393243048.854141"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "733"
-         endingLineNumber = "733"
-         landmarkName = "HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)"
+         startingLineNumber = "724"
+         endingLineNumber = "724">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GameHockey/GameAI.cpp"
+         timestampString = "393318198.194684"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "661"
+         endingLineNumber = "661"
+         landmarkName = "GameAI::moveComputer(cocos2d::CCPoint point)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GameHockey/GameAI.cpp"
+         timestampString = "393301801.473084"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "GameAI::GameAI()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GameHockey/Classes/AppDelegate.cpp"
+         timestampString = "393301590.249649"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "AppDelegate::applicationDidFinishLaunching()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GameHockey/Classes/HelloWorldScene.cpp"
+         timestampString = "393301658.683064"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "HelloWorld::HelloWorld()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

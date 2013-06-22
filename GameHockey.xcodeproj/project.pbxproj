@@ -288,6 +288,7 @@
 		DC675A7317681CB900F0C732 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC675A7217681CB900F0C732 /* HelloWorldScene.cpp */; };
 		DC675A7517681CB900F0C732 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = DC675A7417681CB900F0C732 /* blocks.png */; };
 		DC675A7D17681DCF00F0C732 /* CCDataVisitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC675A7B17681DCF00F0C732 /* CCDataVisitor.cpp */; };
+		DC6C18031771474A00378617 /* GameAI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC6C18021771474A00378617 /* GameAI.cpp */; };
 		DC8B39D9176972C7000FD313 /* LongGreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8B39D7176972C7000FD313 /* LongGreen2.png */; };
 		DC8B39DA176972C7000FD313 /* LongRed2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC8B39D8176972C7000FD313 /* LongRed2.png */; };
 		DC8B39DD17697DDB000FD313 /* MyContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */; };
@@ -897,6 +898,8 @@
 		DC675A7417681CB900F0C732 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		DC675A7B17681DCF00F0C732 /* CCDataVisitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCDataVisitor.cpp; sourceTree = "<group>"; };
 		DC675A7C17681DCF00F0C732 /* CCDataVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDataVisitor.h; sourceTree = "<group>"; };
+		DC6C18011771473C00378617 /* GameAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameAI.h; sourceTree = "<group>"; };
+		DC6C18021771474A00378617 /* GameAI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameAI.cpp; sourceTree = "<group>"; };
 		DC8B39D7176972C7000FD313 /* LongGreen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LongGreen2.png; sourceTree = "<group>"; };
 		DC8B39D8176972C7000FD313 /* LongRed2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LongRed2.png; sourceTree = "<group>"; };
 		DC8B39DB17697DDB000FD313 /* MyContactListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyContactListener.cpp; sourceTree = "<group>"; };
@@ -2112,6 +2115,8 @@
 				DC675A7217681CB900F0C732 /* HelloWorldScene.cpp */,
 				DCF61D98176F0BF000B0B46D /* CCTouchJoint.h */,
 				DCF61D99176F0BFD00B0B46D /* CCTouchJoint.cpp */,
+				DC6C18011771473C00378617 /* GameAI.h */,
+				DC6C18021771474A00378617 /* GameAI.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2451,6 +2456,7 @@
 				DC675A7D17681DCF00F0C732 /* CCDataVisitor.cpp in Sources */,
 				DC8B39DD17697DDB000FD313 /* MyContactListener.cpp in Sources */,
 				DCF61D9A176F0BFE00B0B46D /* CCTouchJoint.cpp in Sources */,
+				DC6C18031771474A00378617 /* GameAI.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
