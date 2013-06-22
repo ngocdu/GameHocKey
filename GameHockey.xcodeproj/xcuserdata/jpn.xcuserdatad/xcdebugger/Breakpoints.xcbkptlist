@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "533"
          endingLineNumber = "533"
-         landmarkName = "HelloWorld::update(float dt)"
+         landmarkName = "HelloWorld::addBgLose()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -26,7 +26,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "532"
          endingLineNumber = "532"
-         landmarkName = "HelloWorld::update(float dt)"
+         landmarkName = "HelloWorld::addBgLose()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -39,7 +39,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "536"
          endingLineNumber = "536"
-         landmarkName = "HelloWorld::update(float dt)"
+         landmarkName = "HelloWorld::addBgLose()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -51,7 +51,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "555"
-         endingLineNumber = "555">
+         endingLineNumber = "555"
+         landmarkName = "HelloWorld::menuMenu(cocos2d::CCObject *psceene)"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -62,9 +64,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "559"
-         endingLineNumber = "559"
-         landmarkName = "HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
-         landmarkType = "5">
+         endingLineNumber = "559">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -75,9 +75,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "600"
-         endingLineNumber = "600"
-         landmarkName = "HelloWorld::ccTouchesMoved(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
-         landmarkType = "5">
+         endingLineNumber = "600">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -89,7 +87,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "597"
          endingLineNumber = "597"
-         landmarkName = "HelloWorld::ccTouchesBegan(cocos2d::CCSet *touches, cocos2d::CCEvent *event)"
+         landmarkName = "HelloWorld::moveBgWin(int i)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -101,7 +99,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "724"
-         endingLineNumber = "724">
+         endingLineNumber = "724"
+         landmarkName = "HelloWorld::rePlay()"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

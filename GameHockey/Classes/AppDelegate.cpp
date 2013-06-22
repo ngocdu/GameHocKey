@@ -1,7 +1,9 @@
 //
-//  GameHockeyAppDelegate.cpp
-//  GameHockey
+//  AirHockeyAppDelegate.cpp
+//  AirHockey
 //
+//  Created by Trung Kien Do on 13/06/12.
+//  Copyright __MyCompanyName__ 2013年. All rights reserved.
 //
 
 #include "AppDelegate.h"
@@ -9,7 +11,8 @@
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "HelloWorldScene.h"
-#include "GameAI.h"
+#include "Menu.h"
+
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -20,7 +23,6 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate()
 {
-    
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
@@ -28,9 +30,19 @@ bool AppDelegate::applicationDidFinishLaunching()
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
-    
-    
 
+    CCSize screenSize = CCEGLView::sharedOpenGLView()->getFrameSize();
+    CCEGLView::sharedOpenGLView()->setDesignResolutionSize(768, 1024, kResolutionExactFit);
+    
+    vector<string>searchPaths;
+    if (screenSize.width > 768) {
+        CCLOG("hd %f", screenSize.width);
+        searchPaths.push_back("/hd");
+        pDirector->setContentScaleFactor(2);
+    }
+    
+    CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
+    
     // turn on display FPS
     pDirector->setDisplayStats(true);
 
@@ -38,13 +50,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    //CCScene *pScene = HelloWorld::scene();
-    CCScene *pScene = GameAI::scene();
+    CCScene *pScene = Menu::scene();
+
     // run
     pDirector->runWithScene(pScene);
-    
-    // Enables the multi-touch
-	//[glView setMultipleTouchEnabled:YES];
+
     return true;
 }
 

@@ -1,7 +1,9 @@
 //
 //  HelloWorldScene.h
-//  GameHockey
+//  AirHockey
 //
+//  Created by Trung Kien Do on 13/06/12.
+//  Copyright __MyCompanyName__ 2013年. All rights reserved.
 //
 #ifndef __HELLO_WORLD_H__
 #define __HELLO_WORLD_H__
@@ -10,6 +12,10 @@
 #include "cocos2d.h"
 #include "Box2D.h"
 #include "MyContactListener.h"
+#include "GameSprite.h"
+
+USING_NS_CC;
+
 class PhysicsSprite : public cocos2d::CCSprite
 {
 public:
@@ -22,6 +28,7 @@ private:
 };
 
 class HelloWorld : public cocos2d::CCLayer {
+    CCSize _screenSize;
 public:
     ~HelloWorld();
     HelloWorld();
@@ -32,48 +39,90 @@ public:
     void initPhysics();
     // adds a new sprite at a given coordinate
     void addNewSpriteAtPosition(cocos2d::CCPoint p);
-
+    void gameReset();
+    void playerScore(int player);
+    void createEdge(float x1, float y1, float x2, float y2, int groupIndex);
+    
     virtual void draw();
-    virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-    virtual void ccTouchesMoved(cocos2d::CCSet* touch,cocos2d::CCEvent* event);
-    virtual void accelerometer(cocos2d::CCAccelerometer *accelerometer,  cocos2d::CCAcceleration *acceleration);
+    virtual void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    
     void update(float dt);
     
-    void kick(float dt);
+    void updateTime(float dt);
+    
+    void addBgWin();
+    void addBgLose();
+    void moveBgWin(int i);
+    void moveBgLose(int i);
+    void menuReplay(CCObject *psceene);
+    void menuMenu(CCObject *psceene);
+    void rePlay();
     
 private:
+    CCSize s = CCDirector::sharedDirector()->getWinSize();
+    b2Body* _groundBody;
+    b2Body *_player1Body;
+    b2Body *_player2Body;
+    b2Body *_ballBody;
+    
+    b2Fixture *_player1Fixture;
+    b2Fixture *_player2Fixture;
+    b2Fixture *_ballFixture;
+    
+    b2Fixture *lowerMiddle;
+    b2Fixture *higherMiddle;
+    
+    GameSprite *_player1;
+    GameSprite *_player2;
+    CCSprite *_ball;
+    
+    CCSprite *_player1ScoreLabel1;
+    CCSprite *_player1ScoreLabel2;
+    CCSprite *_player2ScoreLabel1;
+    CCSprite *_player2ScoreLabel2;
+    
+    int _player1Score = 0;
+    int _sc1Tens;
+    int _sc1SingleDigit;
+    int _player2Score = 0;
+    int _sc2Tens;
+    int _sc2SingleDigit;
+    
+    float _ballX;
+    float _ballY;
+    
+    float lastHit = 0;
+    
+    bool p1touched = false;
+    bool p2touched = false;
+    
+    CCArray *_players;
+    
     b2World* world;
     cocos2d::CCTexture2D* m_pSpriteTexture; // weak ref
     
-    b2Body *_body;
-    cocos2d::CCSprite *_ball;
-
-    b2Body *groundBody;
-    b2Fixture *_bottomFixture;
-    b2Fixture *_ballFixture;
-    
-    b2Body *_paddleBody;
-    b2Fixture *_paddleFixture;
-    
-    b2Body *_paddleBody2;
-    b2Fixture *_paddleFixture2;
-
-    cocos2d::CCSprite *gol1;
-    b2Body *body_gol1;
-    b2Fixture *gol1_Fixture;
-    cocos2d::CCSprite *gol2;
-    b2Body *body_gol2;
-    b2Fixture *gol2_Fixture;
-    int sumPoint1;
-    cocos2d:: CCSprite * textSumPoint1;
-    
-    int sumPoint2;
-    cocos2d:: CCSprite * textSumPoint2;
+    b2MouseJoint *_mouseJoint;
     
     MyContactListener *_contactListener;
     
-    cocos2d::CCArray *touchJointList;
+    int minutes;
+	int seconds;
+    bool playing;
+	cocos2d:: CCSprite *spriteTime ;
+    
+    //when finish
+    CCSprite *bgWin;
+    CCSprite *bgLose;
+    CCMenuItemImage *replayWin;
+    CCMenuItemImage *replayLose;
+    CCMenuItemImage *menuWin;
+    CCMenuItemImage *menuLose;
+    CCMenu *menuFinish;
+    CCLabelTTF *lb_point;
+    bool win ;
+    bool lose ;
 };
 
 #endif // __HELLO_WORLD_H__
